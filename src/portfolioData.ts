@@ -9,6 +9,7 @@ export const profileData: ProfileData = {
   location: "Faridabad / Gurugram, Haryana, India",
   github: "https://github.com/gurleen0202",
   linkedin: "https://linkedin.com/in/gurleen-kaur-02",
+  avatar: "<img src='https://i.postimg.cc/sQmGNN9j/Whats-App-Image-2026-08-05-at-3-17-52-PM.jpg' border='0' alt='Whats-App-Image-2026-08-05-at-3-17-52-PM'>",
   bio: [
     "A curious mind in code and a creative soul in fashion—that's who I am. Currently pursuing my B.Tech in Computer Science Engineering at K.R. Mangalam University, I live at the intersection of technology and artistry.",
     "When I'm not writing lines of code or exploring new AI innovations, I bring concepts of aesthetics and expression to life. With a passion for full-stack development, AI/ML, and UI/UX design, I'm on a mission to blend data, design, and innovation.",

@@ -116,8 +116,8 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
             <div className="relative max-w-sm w-full group">
               <div className="w-full aspect-[4/5] bg-pink-900/20 border border-pink-600/30 rounded-xl overflow-hidden relative shadow-2xl flex items-center justify-center">
                 <img
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80"
-                  alt="Gurleen Kaur - Software Engineer"
+                  src={data.avatar || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80"}
+                  alt={`${data.name} - Profile Photo`}
                   className="w-full h-full object-cover filter grayscale contrast-110 group-hover:grayscale-0 transition-all duration-500 opacity-90 group-hover:opacity-100"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80" />

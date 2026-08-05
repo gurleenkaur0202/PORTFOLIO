@@ -60,6 +60,7 @@ export interface ProfileData {
   location: string;
   github: string;
   linkedin: string;
+  avatar?: string;
   bio: string[];
   coursework: string[];
   resumePdfUrl: string;
