@@ -8,20 +8,7 @@ interface ProjectsProps {
 }
 
 export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [activeModalProject, setActiveModalProject] = useState<ProjectItem | null>(null);
-
-  const categories = [
-    { id: 'all', label: 'All Projects' },
-    { id: 'ai', label: 'AI & Productivity' },
-    { id: 'web', label: 'Web Development' },
-    { id: 'mobile', label: 'Mobile Apps' },
-    { id: 'design', label: 'UI/UX Design' },
-  ];
-
-  const filteredProjects = selectedCategory === 'all'
-    ? projects
-    : projects.filter(p => p.category === selectedCategory);
 
   return (
     <section id="projects" className="py-20 bg-[#0a0a0a] relative overflow-hidden border-t border-zinc-800/80">
@@ -40,27 +27,9 @@ export const Projects: React.FC<ProjectsProps> = ({ projects }) => {
           </p>
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              id={`project-category-${cat.id}`}
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`px-3.5 py-1.5 rounded text-[11px] font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer ${
-                selectedCategory === cat.id
-                  ? 'bg-pink-600 text-white shadow-md'
-                  : 'bg-zinc-900 text-gray-400 border border-zinc-800 hover:border-pink-600/50 hover:text-pink-400'
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-
         {/* Projects Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
+          {projects.map((project) => (
             <div
               key={project.id}
               className="bg-zinc-900/60 rounded-xl border border-zinc-800 hover:border-pink-600/50 overflow-hidden transition-all duration-300 flex flex-col group"

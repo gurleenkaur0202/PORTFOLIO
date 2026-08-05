@@ -98,63 +98,28 @@ export const Skills: React.FC<SkillsProps> = ({ skills }) => {
               className="bg-zinc-900/60 rounded-xl p-5 border border-zinc-800 hover:border-pink-600/50 transition-all duration-300 group flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center space-x-3">
-                    <div className="p-2 rounded-lg bg-pink-600/10 border border-pink-600/20 text-pink-500 group-hover:bg-pink-600 group-hover:text-white transition-colors">
-                      {renderIcon(skill.iconName)}
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-bold text-white group-hover:text-pink-400 transition-colors">
-                        {skill.name}
-                      </h3>
-                      <span className="text-[10px] text-pink-500 uppercase tracking-widest font-bold">
-                        {skill.category}
-                      </span>
-                    </div>
+                <div className="flex items-center space-x-3 mb-3">
+                  <div className="p-2 rounded-lg bg-pink-600/10 border border-pink-600/20 text-pink-500 group-hover:bg-pink-600 group-hover:text-white transition-colors">
+                    {renderIcon(skill.iconName)}
                   </div>
-                  <span className="text-[10px] font-bold text-pink-400 bg-pink-600/10 px-2 py-0.5 rounded border border-pink-600/30">
-                    {skill.level}%
-                  </span>
+                  <div>
+                    <h3 className="text-sm font-bold text-white group-hover:text-pink-400 transition-colors">
+                      {skill.name}
+                    </h3>
+                    <span className="text-[10px] text-pink-500 uppercase tracking-widest font-bold">
+                      {skill.category}
+                    </span>
+                  </div>
                 </div>
 
                 {skill.description && (
-                  <p className="text-xs text-gray-400 mb-4 leading-relaxed">
+                  <p className="text-xs text-gray-400 leading-relaxed">
                     {skill.description}
                   </p>
                 )}
               </div>
-
-              {/* Progress Bar */}
-              <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden mt-2">
-                <div
-                  className="bg-pink-600 h-full rounded-full transition-all duration-1000 ease-out"
-                  style={{ width: `${skill.level}%` }}
-                />
-              </div>
             </div>
           ))}
-        </div>
-
-        {/* Quick Tech Chip Cloud */}
-        <div className="mt-14 bg-zinc-900/40 rounded-xl p-6 border border-zinc-800 text-center">
-          <h3 className="text-xs uppercase font-bold text-pink-500 tracking-widest mb-4">
-            Tech Stack At A Glance
-          </h3>
-          <div className="flex flex-wrap justify-center gap-2">
-            {[
-              "Java", "Python", "C++", "HTML5", "CSS3", "JavaScript", "React", "Node.js",
-              "Neural Networks", "OpenAI GPT", "LLM Post-Training", "Prompt Engineering",
-              "Git", "GitHub", "Figma", "Adobe XD", "UI/UX Design",
-              "Project Management", "Team Collaboration"
-            ].map((tech, idx) => (
-              <span
-                key={idx}
-                className="px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider bg-zinc-900 text-gray-300 border border-zinc-800 hover:border-pink-600/50 hover:text-pink-400 transition-all cursor-default"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
         </div>
 
       </div>
