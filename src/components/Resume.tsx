@@ -1,30 +1,31 @@
 import React, { useState } from 'react';
-import { FileText, Download, ExternalLink, Edit3, Check, Copy, RefreshCw, Eye } from 'lucide-react';
+import { FileText, Download, ExternalLink, Check, Copy, Eye } from 'lucide-react';
 import { ProfileData } from '../types';
 
 interface ResumeProps {
   data: ProfileData;
-  onUpdateResumeUrl: (newUrl: string) => void;
+  onUpdateResumeUrl?: (newUrl: string) => void;
 }
 
-export const Resume: React.FC<ResumeProps> = ({ data, onUpdateResumeUrl }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [inputUrl, setInputUrl] = useState(data.resumePdfUrl);
+export const Resume: React.FC<ResumeProps> = ({ data }) => {
   const [copied, setCopied] = useState(false);
-  const [activeTab, setActiveTab] = useState<'view' | 'text'>('view');
-
-  const handleSaveUrl = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (inputUrl.trim()) {
-      onUpdateResumeUrl(inputUrl.trim());
-      setIsEditing(false);
-    }
-  };
+  const [activeTab, setActiveTab] = useState<'text' | 'view'>('text');
 
   const handleCopyText = () => {
     navigator.clipboard.writeText(JSON.stringify(data, null, 2));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  // Convert Google Drive view links to embeddable preview links if needed
+  const getEmbedUrl = (url: string) => {
+    if (url.includes('drive.google.com/file/d/')) {
+      const match = url.match(/\/d\/([^\/]+)/);
+      if (match && match[1]) {
+        return `https://drive.google.com/file/d/${match[1]}/preview`;
+      }
+    }
+    return `${url}#toolbar=1&navpanes=0`;
   };
 
   return (
@@ -40,7 +41,7 @@ export const Resume: React.FC<ResumeProps> = ({ data, onUpdateResumeUrl }) => {
             Official Resume
           </h3>
           <p className="text-xs sm:text-sm text-gray-400">
-            View or download Gurleen's complete resume in PDF format.
+            View Gurleen's structured resume or download the complete document in PDF format.
           </p>
         </div>
 
@@ -49,18 +50,6 @@ export const Resume: React.FC<ResumeProps> = ({ data, onUpdateResumeUrl }) => {
           
           {/* Tab Switcher */}
           <div className="flex items-center space-x-1 bg-[#0a0a0a] p-1 rounded-lg border border-zinc-800">
-            <button
-              id="resume-tab-pdf-view"
-              onClick={() => setActiveTab('view')}
-              className={`px-3 py-1.5 rounded text-[11px] font-bold uppercase tracking-wider transition-all flex items-center space-x-1.5 cursor-pointer ${
-                activeTab === 'view'
-                  ? 'bg-pink-600 text-white shadow-sm'
-                  : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              <Eye className="w-3.5 h-3.5" />
-              <span>PDF Document</span>
-            </button>
             <button
               id="resume-tab-formatted-text"
               onClick={() => setActiveTab('text')}
@@ -73,19 +62,22 @@ export const Resume: React.FC<ResumeProps> = ({ data, onUpdateResumeUrl }) => {
               <FileText className="w-3.5 h-3.5" />
               <span>Formatted Web View</span>
             </button>
+            <button
+              id="resume-tab-pdf-view"
+              onClick={() => setActiveTab('view')}
+              className={`px-3 py-1.5 rounded text-[11px] font-bold uppercase tracking-wider transition-all flex items-center space-x-1.5 cursor-pointer ${
+                activeTab === 'view'
+                  ? 'bg-pink-600 text-white shadow-sm'
+                  : 'text-gray-400 hover:text-white'
+              }`}
+            >
+              <Eye className="w-3.5 h-3.5" />
+              <span>PDF Document</span>
+            </button>
           </div>
 
           {/* Action Buttons */}
           <div className="flex items-center space-x-2">
-            <button
-              id="update-resume-link-toggle-btn"
-              onClick={() => setIsEditing(!isEditing)}
-              className="px-3 py-1.5 rounded border border-zinc-800 bg-zinc-900 text-gray-300 hover:text-pink-400 text-[10px] font-bold uppercase tracking-widest flex items-center space-x-1.5 transition-colors cursor-pointer"
-            >
-              <Edit3 className="w-3.5 h-3.5 text-pink-500" />
-              <span>{isEditing ? 'Cancel Edit' : 'Edit PDF Link'}</span>
-            </button>
-
             <a
               id="download-resume-direct-btn"
               href={data.resumePdfUrl}
@@ -95,62 +87,13 @@ export const Resume: React.FC<ResumeProps> = ({ data, onUpdateResumeUrl }) => {
               className="px-4 py-1.5 rounded bg-pink-600 hover:bg-pink-700 text-white font-bold text-[10px] uppercase tracking-widest flex items-center space-x-1.5 transition-all cursor-pointer shadow-sm"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>Download CV</span>
+              <span>Download CV PDF</span>
             </a>
           </div>
         </div>
 
-        {/* Update Resume URL Form Drawer */}
-        {isEditing && (
-          <form
-            onSubmit={handleSaveUrl}
-            className="mb-6 p-5 bg-zinc-900 rounded-xl border border-pink-600/50 shadow-xl space-y-3"
-          >
-            <div className="flex items-center space-x-2 text-pink-500 font-bold text-xs uppercase tracking-wider">
-              <RefreshCw className="w-3.5 h-3.5 text-pink-500" />
-              <span>Update Resume PDF Target Link</span>
-            </div>
-            <p className="text-xs text-gray-400">
-              Paste a link to your Google Drive PDF, GitHub raw PDF, or cloud storage document:
-            </p>
-            <div className="flex flex-col sm:flex-row gap-2">
-              <input
-                type="url"
-                value={inputUrl}
-                onChange={(e) => setInputUrl(e.target.value)}
-                placeholder="https://example.com/my-updated-resume.pdf"
-                required
-                className="flex-1 px-3 py-2 rounded bg-[#0a0a0a] border border-zinc-800 text-white text-xs focus:outline-none focus:border-pink-600"
-              />
-              <button
-                type="submit"
-                className="px-4 py-2 rounded bg-pink-600 text-white text-[10px] font-bold uppercase tracking-widest hover:bg-pink-700 transition-colors cursor-pointer"
-              >
-                Save Target Link
-              </button>
-            </div>
-          </form>
-        )}
-
-        {/* Tab 1: PDF Viewer Embed */}
-        {activeTab === 'view' ? (
-          <div className="bg-zinc-900/60 rounded-xl border border-zinc-800 overflow-hidden p-2 sm:p-3">
-            <div className="relative w-full aspect-[8.5/11] min-h-[500px] sm:min-h-[700px] rounded-lg overflow-hidden bg-[#0a0a0a]">
-              <iframe
-                src={`${data.resumePdfUrl}#toolbar=1&navpanes=0`}
-                title="Gurleen Kaur Resume PDF"
-                className="w-full h-full border-0"
-              />
-              <div className="absolute top-3 right-3 bg-[#0a0a0a]/90 backdrop-blur-md px-2.5 py-1 rounded border border-zinc-800 text-[10px] text-pink-400 font-bold uppercase tracking-wider flex items-center space-x-1">
-                <ExternalLink className="w-3 h-3" />
-                <a href={data.resumePdfUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                  Open PDF in New Tab
-                </a>
-              </div>
-            </div>
-          </div>
-        ) : (
-          /* Tab 2: Formatted Text Web Resume */
+        {/* Tab 1: Formatted Text Web Resume */}
+        {activeTab === 'text' ? (
           <div className="bg-zinc-900/60 rounded-xl border border-zinc-800 p-6 space-y-6 text-gray-200">
             {/* Header */}
             <div className="border-b border-zinc-800 pb-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -195,6 +138,23 @@ export const Resume: React.FC<ResumeProps> = ({ data, onUpdateResumeUrl }) => {
               <div>
                 <h4 className="text-xs font-bold text-pink-500 uppercase tracking-widest mb-2">Projects</h4>
                 <p className="text-xs text-gray-400 leading-relaxed">Yggdrasil (Journal/Productivity), ByteStock (Android GST Inventory), ProTrack (Collaborative Workspace), Punjab Fabricators (Interior Design), OPS Naturals Web Platform.</p>
+              </div>
+            </div>
+          </div>
+        ) : (
+          /* Tab 2: PDF Viewer Embed */
+          <div className="bg-zinc-900/60 rounded-xl border border-zinc-800 overflow-hidden p-2 sm:p-3">
+            <div className="relative w-full aspect-[8.5/11] min-h-[500px] sm:min-h-[700px] rounded-lg overflow-hidden bg-[#0a0a0a]">
+              <iframe
+                src={getEmbedUrl(data.resumePdfUrl)}
+                title="Gurleen Kaur Resume PDF"
+                className="w-full h-full border-0"
+              />
+              <div className="absolute top-3 right-3 bg-[#0a0a0a]/90 backdrop-blur-md px-2.5 py-1 rounded border border-zinc-800 text-[10px] text-pink-400 font-bold uppercase tracking-wider flex items-center space-x-1">
+                <ExternalLink className="w-3 h-3" />
+                <a href={data.resumePdfUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  Open PDF in New Tab
+                </a>
               </div>
             </div>
           </div>

@@ -72,7 +72,7 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
                 className="px-5 py-2.5 rounded border border-pink-600 text-pink-500 hover:bg-pink-600 hover:text-white font-bold text-[10px] uppercase tracking-widest transition-all flex items-center justify-center space-x-2 cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>Download CV</span>
+                <span>Download CV PDF</span>
               </a>
             </div>
 
@@ -113,17 +113,14 @@ export const Hero: React.FC<HeroProps> = ({ data }) => {
 
           {/* Portrait Visual Column */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative max-w-sm w-full group">
-              <div className="w-full aspect-[4/5] bg-pink-900/20 border border-pink-600/30 rounded-xl overflow-hidden relative shadow-2xl flex items-center justify-center">
+            <div className="relative max-w-sm w-full">
+              <div className="w-full aspect-[4/5] bg-pink-900/10 border border-pink-600/30 rounded-xl overflow-hidden relative shadow-2xl flex items-center justify-center">
                 <img
-                  src={data.avatar || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80"}
+                  src={data.heroPhoto || data.avatar || "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80"}
                   alt={`${data.name} - Profile Photo`}
-                  className="w-full h-full object-cover filter grayscale contrast-110 group-hover:grayscale-0 transition-all duration-500 opacity-90 group-hover:opacity-100"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80" />
-              </div>
-              <div className="absolute -bottom-2 -right-2 bg-pink-600 px-3 py-1 text-[10px] font-bold text-white uppercase tracking-widest shadow-md">
-                CSE STUDENT
               </div>
             </div>
           </div>

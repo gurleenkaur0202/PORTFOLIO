@@ -61,6 +61,8 @@ export interface ProfileData {
   github: string;
   linkedin: string;
   avatar?: string;
+  heroPhoto?: string;
+  aboutPhoto?: string;
   bio: string[];
   coursework: string[];
   resumePdfUrl: string;

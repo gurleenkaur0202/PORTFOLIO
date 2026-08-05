@@ -7,9 +7,11 @@ export const profileData: ProfileData = {
   email: "kaurgurleen0202@gmail.com",
   phone: "+91-8178126477",
   location: "Faridabad / Gurugram, Haryana, India",
-  github: "https://github.com/gurleen0202",
-  linkedin: "https://linkedin.com/in/gurleen-kaur-02",
-  avatar: "<img src='https://i.postimg.cc/sQmGNN9j/Whats-App-Image-2026-08-05-at-3-17-52-PM.jpg' border='0' alt='Whats-App-Image-2026-08-05-at-3-17-52-PM'>",
+  github: "https://github.com/gurleenkaur0202",
+  linkedin: "https://www.linkedin.com/in/gurleen-kaur-a99651357/",
+  avatar: "https://i.postimg.cc/kG3NBr2b/Whats-App-Image-2026-08-05-at-3-17-52-PM.jpg", // Hero Section Photo
+  heroPhoto: "https://i.postimg.cc/kG3NBr2b/Whats-App-Image-2026-08-05-at-3-17-52-PM.jpg", // Hero Section Photo
+  aboutPhoto: "https://i.postimg.cc/fRzbDHRY/Whats-App-Image-2026-08-04-at-9-42-28-AM.jpg", // About Me Section Photo
   bio: [
     "A curious mind in code and a creative soul in fashion—that's who I am. Currently pursuing my B.Tech in Computer Science Engineering at K.R. Mangalam University, I live at the intersection of technology and artistry.",
     "When I'm not writing lines of code or exploring new AI innovations, I bring concepts of aesthetics and expression to life. With a passion for full-stack development, AI/ML, and UI/UX design, I'm on a mission to blend data, design, and innovation.",
@@ -21,7 +23,7 @@ export const profileData: ProfileData = {
     "Object-Oriented Programming (OOP)",
     "Data Analysis & Visualization"
   ],
-  resumePdfUrl: "https://raw.githubusercontent.com/gurleen0202/portfolio-assets/main/Gurleen_Kaur_Resume.pdf"
+  resumePdfUrl: "https://drive.google.com/file/d/1D7usMaBYiyL-7M3xFPPCmVKV12LR_SfE/view?usp=sharing"
 };
 
 export const skillsData: Skill[] = [
@@ -131,10 +133,10 @@ export const projectsData: ProjectItem[] = [
     longDescription: "Yggdrasil is built for individuals who want an all-in-one space for daily reflections, goal tracking, and knowledge management. Features rich text editing, encrypted local storage, habit tracking, and tag-based knowledge discovery.",
     category: "ai",
     tags: ["React", "TypeScript", "Tailwind CSS", "Productivity Platform", "UI/UX Design"],
-    image: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1200&q=80",
+    image: "https://i.postimg.cc/zB0j22vV/Screenshot-2026-08-05-180124.png",
     featured: true,
-    githubUrl: "https://github.com/gurleen0202/yggdrasil",
-    demoUrl: "https://yggdrasil-journal.vercel.app"
+    githubUrl: "https://github.com/gurleenkaur0202/Yggdrasil",
+    demoUrl: "https://yggdrasil-0220.vercel.app/"
   }
 ];
 

@@ -56,20 +56,14 @@ export const About: React.FC<AboutProps> = ({ data }) => {
           
           {/* Photo Column */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-sm group">
-              <div className="relative rounded-xl overflow-hidden border border-pink-600/30 bg-zinc-900 shadow-2xl">
+            <div className="relative w-full max-w-sm">
+              <div className="rounded-xl overflow-hidden border border-pink-600/30 bg-zinc-900 shadow-xl">
                 <img
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
-                  alt="Gurleen Kaur - About Me Photo"
-                  className="w-full h-[380px] object-cover object-top filter grayscale contrast-110 group-hover:grayscale-0 transition-all duration-500"
+                  src={data.aboutPhoto || data.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"}
+                  alt={`${data.name} - About Me Photo`}
+                  referrerPolicy="no-referrer"
+                  className="w-full h-auto object-cover rounded-xl"
                 />
-                <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent">
-                  <p className="text-[10px] text-pink-500 uppercase font-bold tracking-wider">Gurleen Kaur</p>
-                  <p className="text-xs font-bold text-white">K.R. Mangalam University (B.Tech CSE '27)</p>
-                </div>
-              </div>
-              <div className="absolute -bottom-2 -right-2 bg-pink-600 px-3 py-1 text-[10px] font-bold text-white uppercase tracking-widest">
-                FARIDABAD / GURUGRAM
               </div>
             </div>
           </div>
